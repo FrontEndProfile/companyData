@@ -1,0 +1,65 @@
+<!-- 
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let card of cards">
+            <div class="card mb-3">
+                <img src="{{card.avatar}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h5 class="card-title">{{ card.name }}</h5>
+                        <p class="card-text">${{ card.price }}</p>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+
+
+
+<div class="container py-5">
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading && currentPage === 1" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <!-- No Products Placeholder -->
+    <div *ngIf="!isLoading && noProducts" class="text-center">
+      <p>No products found</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">No Products Available</h5>
+          <p class="card-text">Please try searching with different keywords.</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Cards List -->
+    <div class="row"  *ngIf="!isLoading || currentPage > 1">
+      <div class="col-md-4" *ngFor="let card of cards">
+        <div class="card mb-3">
+          <img [src]="card.avatar" class="card-img-top" alt="...">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h5 class="card-title">{{ card.name }}</h5>
+              <p class="card-text">${{ card.price }}</p>
+            </div>
+            <!-- <a href="#" class="btn btn-outline-primary">Buy Now</a> -->
+            <button class="btn btn-outline-primary" (click)="goToDetails(card.id)">Buy Now</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Load More Button -->
+    <div class="text-center mt-4" *ngIf="!allLoaded && !isLoading">
+        <button class="btn btn-primary" (click)="loadMoreCards()">Load More</button>
+      </div>
+  </div>
+  
